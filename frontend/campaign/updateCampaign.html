@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Campaign</title>
+    <link rel="stylesheet" href="updateCampaign.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Update Campaign</h1>
+        <form id="updateForm">
+            <input type="text" id="campaignId" placeholder="Campaign ID" required>
+            <input type="text" id="title" placeholder="Title">
+            <textarea id="description" placeholder="Description"></textarea>
+            <input type="number" id="goalAmount" placeholder="Goal Amount">
+            <input type="text" id="milestones" placeholder="Milestones (comma separated)">
+            <input type="url" id="media" placeholder="Media URL">
+            <button type="submit">Update Campaign</button>
+        </form>
+        <p id="message"></p>
+    </div>
+    <script src="./updateCampaign.js"></script>
+</body>
+</html>
