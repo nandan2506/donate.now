@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>All Campaigns</title>
+    <link rel="stylesheet" href="./index.css" />
+    <!-- <link rel="stylesheet" href="./donate/donate.html"> -->
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav-left">
+        <button id="addCampaignBtn">ADD CAMPAIGNS</button>
+        <button id="donateNowBtn">DONATE NOW</button>
+      </div>
+      
+      <div class="nav-center">
+        <input
+          type="search"
+          name="search"
+          id="search"
+          placeholder="Search Campaigns"
+        />
+      </div>
+      <div class="nav-right">
+        <button id="signInBtn">Sign In</button>
+        <button id="loginBtn">Log In</button>
+      </div>
+    </header>
+
+    <main>
+      <h1>All Campaigns</h1>
+      <div id="campaigns" class="campaigns"></div>
+      <div id="error" class="error"></div>
+    </main>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

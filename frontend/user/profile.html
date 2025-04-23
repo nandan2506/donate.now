@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile</title>
+  <link rel="stylesheet" href="./profile.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- <link rel="stylesheet" href="../donate/donate.html"> -->
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-left">
+      <button id="addCampaignBtn">ADD CAMPAIGNS</button>
+    </div>
+
+    <div class="nav-center">
+      <input type="search" id="search" placeholder="Search Campaigns" />
+    </div>
+
+    <div class="nav-right">
+      <div id="profileBtn">
+        <i class="fa-solid fa-bars"></i>
+        <div id="ham" class="hidden">
+          <p id="myCampaigns">My Campaigns</p>
+          <p id="myDonations">My Donations</p>
+          <p id="logout">Log out</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <h1>All Campaigns</h1>
+    <div id="campaigns" class="campaigns"></div>
+    <div id="error" class="error"></div>
+  </main>
+
+  <script src="./profile.js"></script>
+</body>
+</html>
