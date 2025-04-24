@@ -51,6 +51,33 @@ const allCampaigns = async(req ,res)=>{
 
 
 
+const campaignById = async(req,res)=>{
+    try {
+        const {campId} = req.params
+        const campaign = await campaignModel.findOne({campId})
+        return res.status(200).json({msg:"campaign found",campaign})
+    } catch (error) {
+        console.log("error while getting campaign",error)
+        return res.status(500).json({msg:"something went wrong"})
+    }
+}
 
 
-module.exports = {newCampaign,updateCampaign,allCampaigns}
+
+const MyCampaigns = async(req,res)=>{
+    try {
+        const {userId} = req.params
+        const campaigns = await campaignModel.find({owner:userId})
+        if(campaigns.length==0){
+            return res.status(200).json({msg:"no campaign found"})
+        }
+        return res.status(200).json({msg:"campaign found",allCampaigns:campaigns})
+    } catch (error) {
+        console.log("error while getting campaign",error)
+        return res.status(500).json({msg:"something went wrong"})
+    }
+}
+
+
+
+module.exports = {newCampaign,updateCampaign,allCampaigns,campaignById,MyCampaigns}

@@ -1,9 +1,24 @@
+const link = "http://localhost:8000";
 
-const link = "http://localhost:8000"
-// First: Get the campaignId from URL
+// Get campaignId from URL
 const urlParams = new URLSearchParams(window.location.search);
-const campaignId = urlParams.get('campaignId'); // it was passed in search params
+const campaignId = urlParams.get('campaignId');
 
+// Immediately fetch and set the campaign title
+(async () => {
+  try {
+    const response = await fetch(`${link}/campaign/Campaign/${campaignId}`);
+    const result = await response.json();
+    const title = document.getElementById("title-campaign");
+    title.innerText = `Campaign: ${result.campaign.title}`;
+  } catch (error) {
+    console.log("Error while setting the title:", error);
+    alert("Something went wrong.");
+  }
+})();
+
+
+// Handle donation submission
 async function handleDonate() {
   const amount = document.getElementById('amount').value;
 
@@ -12,11 +27,11 @@ async function handleDonate() {
     return;
   }
 
-  const token = localStorage.getItem('add-new-campaign-token'); // get the token
+  const token = localStorage.getItem('add-new-campaign-token');
 
   if (!token) {
     alert('Please login first!');
-    window.location.href = "../user/user.login.html"; 
+    window.location.href = "../user/user.login.html";
     return;
   }
 
@@ -34,7 +49,7 @@ async function handleDonate() {
 
     if (response.ok) {
       alert('Thank you for your donation!');
-      window.location.href = "../user/profile.html"; // or wherever you want
+      window.location.href = "../user/profile.html";
     } else {
       alert(data.msg || 'Failed to donate.');
     }
