@@ -37,7 +37,7 @@ async function handleLogin() {
           window.location.href = redirectPath;
         } else {
           // Normal login → send to profile
-          window.location.href = "../user/profile.html";
+          window.open("../user/profile.html");
         }
       }
     }

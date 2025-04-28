@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const userModel = require("../models/user.model")
+const nodemailer = require("nodemailer")
 
 
 
@@ -46,7 +47,7 @@ const userLogin = async (req, res) => {
             const isPasswordCorrect = bcrypt.compareSync(password, userExist.password)
 
             if (isPasswordCorrect) {
-                const tkn = jwt.sign({ userId: userExist._id, email: userExist.email }, process.env.JWT_SECRET, { expiresIn: "1 day" });
+                const tkn = jwt.sign({ userId: userExist._id, email: userExist.email }, process.env.JWT_SECRET, { expiresIn:  "1 day"});
                 return res.status(200).json({ message: "user login successfully", tkn, userExist })
             }
         }
@@ -61,7 +62,47 @@ const userLogin = async (req, res) => {
 
 
 
+const userProfile = async(req,res)=>{
+    try {
+        const {userId} = req.user
+        const userProfile = await userModel.findOne({_id:userId})
+        if(userProfile){
+            return res.status(202).json({msg:"user found",userProfile})
+        }
+        return res.status(404).json({msg:"user not found"})
+    } catch (error) {
+        console.log("error while finding user profile",error)
+        return res.status(500).json({msg:'something went wrong'})
+    }
+}
 
 
 
-module.exports = { userRegister, userLogin, allUsers}
+
+const updateProfile = async(req,res)=>{
+    try {
+        const {userId} = req.user
+        const {username,email}=req.body
+        const userExist = await userModel.findById(userId)
+        if(userExist){
+            const emailExist = await userModel.findOne({email})
+            if(emailExist){
+                return res.status(400).json({msg:"this email already registered"})
+            }
+            const updatedProfile = await userModel.findByIdAndUpdate(userId,{username,email},{new:true})
+            return res.status(200).json({msg:"user updated successfully",updatedProfile})
+        }
+    } catch (error) {
+        console.log("error while updating user",error)
+        return res.status(500).json({msg:"something went wrong"})
+    }
+}
+
+
+
+
+
+
+
+
+module.exports = { userRegister, userLogin, allUsers,userProfile,updateProfile}

@@ -13,15 +13,27 @@ async function fetchCampaigns() {
       return;
     }
 
+    campaignsDiv.innerHTML = ""; // Clear before adding new
+
     data.campaigns.forEach((campaign) => {
+      const percentageRaised = campaign.raisedAmount
+        ? ((campaign.raisedAmount / campaign.goalAmount) * 100).toFixed(2)
+        : 0;
+
       const card = document.createElement("div");
       card.className = "campaign-card";
       card.innerHTML = `
-         <h3>${campaign.title}</h3>
-         <p><strong>Description:</strong> ${campaign.description}</p>
-         <p><strong>Goal Amount:</strong> ${campaign.goalAmount}</p>
-         <button class="donate-btn" data-campaign-id="${campaign._id}">Donate</button>
-       `;
+        <h3>${campaign.title}</h3>
+        <p><strong>Description:</strong> ${campaign.description}</p>
+        <p><strong>Goal Amount:</strong> ₹${campaign.goalAmount}</p>
+        <p><strong>Raised Amount:</strong> ₹${campaign.raisedAmount || 0} (${percentageRaised}%)</p>
+
+        <div class="progress-bar">
+          <div class="progress" style="width: ${percentageRaised}%"></div>
+        </div>
+
+        <button class="donate-btn" data-campaign-id="${campaign._id}">Donate</button>
+      `;
       campaignsDiv.appendChild(card);
     });
 
@@ -29,8 +41,9 @@ async function fetchCampaigns() {
     const donateButtons = document.querySelectorAll(".donate-btn");
     donateButtons.forEach((btn) => {
       btn.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent default behavior
         const campaignId = e.target.getAttribute("data-campaign-id");
-        checkAuthAndRedirect(`./donate/donate.html?campaignId=${campaignId}`);
+        checkAuthAndRedirect(`./donate/donate.html?campaignId=${campaignId}`, e);
       });
     });
 
@@ -69,21 +82,17 @@ async function fetchCampaigns() {
 const addCampaignBtn = document.getElementById("addCampaignBtn");
 const donateNowBtn = document.getElementById("donateNowBtn");
 
-
-function checkAuthAndRedirect(path) {
+function checkAuthAndRedirect(path, event) {
+  if (event) event.preventDefault(); // optional, only if event passed
   const token = localStorage.getItem("add-new-campaign-token");
   if (token) {
     window.location.href = path;
   } else {
-    // User not logged in
     localStorage.setItem("redirectAfterLogin", path); // Save where user wanted to go
     alert("Please login first to continue.");
     window.location.href = "./user/user.login.html";
   }
 }
-
-
-
 
 addCampaignBtn.addEventListener("click", () => {
   checkAuthAndRedirect("./campaign/newCampaign.html");

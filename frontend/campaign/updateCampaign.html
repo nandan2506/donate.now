@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Update Campaign</title>
-    <link rel="stylesheet" href="updateCampaign.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Campaign</title>
+  <link rel="stylesheet" href="./updateCampaign.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Update Campaign</h1>
-        <form id="updateForm">
-            <input type="text" id="campaignId" placeholder="Campaign ID" required>
-            <input type="text" id="title" placeholder="Title">
-            <textarea id="description" placeholder="Description"></textarea>
-            <input type="number" id="goalAmount" placeholder="Goal Amount">
-            <input type="text" id="milestones" placeholder="Milestones (comma separated)">
-            <input type="url" id="media" placeholder="Media URL">
-            <button type="submit">Update Campaign</button>
-        </form>
-        <p id="message"></p>
-    </div>
-    <script src="./updateCampaign.js"></script>
+
+  <div class="container">
+    <h2>Update Campaign</h2>
+    
+    <form id="updateForm">
+      <input type="hidden" id="campaignId">
+      
+      <label for="title">Campaign Title</label>
+      <input type="text" id="title" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" required></textarea>
+
+      <label for="goalAmount">Goal Amount</label>
+      <input type="number" id="goalAmount" required>
+
+      <label for="milestones">Milestones (comma-separated)</label>
+      <input type="text" id="milestones" required>
+
+      <label for="media">Media Link</label>
+      <input type="text" id="media" required>
+
+      <button type="submit">Update Campaign</button>
+    </form>
+
+    <p id="message"></p>
+  </div>
+
+  <script src="./updateCampaign.js"></script>
 </body>
 </html>

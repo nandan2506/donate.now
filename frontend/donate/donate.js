@@ -7,27 +7,37 @@ const campaignId = urlParams.get('campaignId');
 // Immediately fetch and set the campaign title
 (async () => {
   try {
-    const response = await fetch(`${link}/campaign/Campaign/${campaignId}`);
+    const token = localStorage.getItem('add-new-campaign-token');  // <-- corrected key
+    const response = await fetch(`${link}/campaign/Campaign/${campaignId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     const result = await response.json();
-    const title = document.getElementById("title-campaign");
-    title.innerText = `Campaign: ${result.campaign.title}`;
+
+    if (result.campaign) {
+      const title = document.getElementById("title-campaign");
+      title.innerText = `Campaign: ${result.campaign.title}`;
+    } else {
+      alert(result.msg || "Something went wrong");
+    }
   } catch (error) {
     console.log("Error while setting the title:", error);
     alert("Something went wrong.");
   }
 })();
 
-
 // Handle donation submission
 async function handleDonate() {
   const amount = document.getElementById('amount').value;
-
+  
   if (!amount || amount <= 0) {
     alert('Please enter a valid donation amount.');
     return;
   }
 
-  const token = localStorage.getItem('add-new-campaign-token');
+  const token = localStorage.getItem('add-new-campaign-token');  // <-- corrected key
 
   if (!token) {
     alert('Please login first!');
