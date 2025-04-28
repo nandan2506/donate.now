@@ -2,8 +2,8 @@ const link = "http://localhost:8000"
 
 
 
-const form = document.getElementById("createCampaignForm");
-const responseMessage = document.getElementById("responseMessage");
+const form = document.getElementById("createForm");
+const responseMessage = document.getElementById("message");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -45,6 +45,7 @@ form.addEventListener("submit", async (e) => {
     if (response.ok) {
       responseMessage.innerText = "Campaign created successfully!";
       responseMessage.style.color = "green";
+      window.location.href="../user/profile.html"
     } else {
       responseMessage.innerText = data.msg || "Something went wrong!";
       responseMessage.style.color = "red";

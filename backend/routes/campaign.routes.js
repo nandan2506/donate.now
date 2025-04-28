@@ -6,10 +6,10 @@ const campaignRoutes = express.Router()
 
 
 campaignRoutes.post("/newCampaign",auth,newCampaign)
-campaignRoutes.patch("/newCampaign/:id",auth,updateCampaign)
+campaignRoutes.patch("/updateCampaign/:id",auth,updateCampaign)
 campaignRoutes.get("/allCampaign/",allCampaigns)
-campaignRoutes.get("/Campaign/:campaignId",campaignById)
-campaignRoutes.get("/myCampaign/:userId",MyCampaigns)
+campaignRoutes.get("/Campaign/:campId",auth,campaignById)
+campaignRoutes.get("/myCampaign/:userId",auth,MyCampaigns)
 
 
 
