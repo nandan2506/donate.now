@@ -1,4 +1,4 @@
-const link = "http://localhost:8000"; // Adjust to your backend URL
+const link = "https://b44-web-051.onrender.com"; // Adjust to your backend URL
 
 // Get the campaignId from URL query parameter
 const urlParams = new URLSearchParams(window.location.search);

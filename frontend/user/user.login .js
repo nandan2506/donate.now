@@ -1,4 +1,4 @@
-const link = "http://localhost:8000/";
+const link = "https://b44-web-051.onrender.com";
 
 async function handleLogin() {
   const email = document.getElementById("email").value.trim();
@@ -12,7 +12,7 @@ async function handleLogin() {
   }
 
   try {
-    const res = await fetch(`${link}user/login`, {
+    const res = await fetch(`${link}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

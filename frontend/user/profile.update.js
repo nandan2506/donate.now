@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   
       try {
-        const res = await fetch("http://localhost:8000/user/updateProfile", {
+        const res = await fetch("https://b44-web-051.onrender.com/user/updateProfile", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
