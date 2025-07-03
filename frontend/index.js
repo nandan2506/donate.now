@@ -1,11 +1,11 @@
-const link = "https://b44-web-051.onrender.com/";
+const link = "http://localhost:8000";
 
 const campaignsDiv = document.getElementById("campaigns");
 const errorDiv = document.getElementById("error");
 
 async function fetchCampaigns() {
   try {
-    const res = await fetch(`${link}campaign/allCampaign`);
+    const res = await fetch(`${link}/campaign/allCampaign`);
     const data = await res.json();
 
     if (data.msg === "no campaigns") {

@@ -11,9 +11,10 @@ const campaignSchema = new mongoose.Schema(
         owner: {type:mongoose.Schema.Types.ObjectId,ref:"user"},
         milestones: [Number],  // like 25%, 50%
         media: [String], // URLs
-        createdAt: Date
+        createdAt: Date,
+        comments:[{ type: mongoose.Schema.Types.ObjectId, ref: "comment" }],
+        moneySpend:[{type: mongoose.Schema.Types.ObjectId, ref: "comment" }]
       }
-      
 )
 
 

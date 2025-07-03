@@ -30,6 +30,22 @@ header.navbar {
   z-index: 10;
 }
 
+.nav-left button {
+  background-color: #fda92c;
+  border: none;
+  padding: 9px 20px;
+  color: white;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-left button:hover {
+  background-color: #fb8c00;
+}
+
 /* Search input */
 .nav-center input {
   width: 300px;

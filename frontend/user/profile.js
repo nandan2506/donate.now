@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const link = "https://b44-web-051.onrender.com";
+  const link = "http://localhost:8000";
 
   const campaignsDiv = document.getElementById("campaigns");
   const errorDiv = document.getElementById("error");

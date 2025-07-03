@@ -1,17 +1,18 @@
-const mongoose = require("mongoose")
-
+const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema(
-    {
-        userId: {type:mongoose.Schema.Type.ObjectId,ref:"user"},
-        campaignId: {type:mongoose.Schema.Type.ObjectId,ref:"campaign"},
-        commentText: String,
-        media: [String],
-        createdAt: Date
-      }
-)
+  {
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+    campaignId: { type: mongoose.Schema.Types.ObjectId, ref: "campaign" },
+    commentText: {
+      type: String,
+      required: [true, "Comment is required"],
+      trim: true
+    }
+  },
+  { timestamps: true } // Adds createdAt and updatedAt
+);
 
+const commentModel = mongoose.model("comment", commentSchema);
 
-const commentModel = mongoose.model("campaign",commentSchema)
-  
-module.exports = commentModel
+module.exports = commentModel;
