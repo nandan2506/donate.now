@@ -180,7 +180,7 @@ const forgetPassword = async (req, res) => {
 
     
 
-    const resetLink = `http://localhost:5173/setNewPassword?token=${resetToken}`;
+    const resetLink = `https://ddonatenow.netlify.app/setNewPassword?token=${resetToken}`;
 
     await transporter.sendMail({
       from: `"DonateNow" <${process.env.EMAIL_USER}>`,
