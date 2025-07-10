@@ -10,7 +10,7 @@ function UpdateProfile() {
   const [successMsg, setSuccessMsg] = useState("");
   const userId = useParams()
 
-  const API_BASE = "http://localhost:8000";
+const API_BASE = "https://crowdfundingplatform.onrender.com";
 
   const token = localStorage.getItem("add-new-campaign-token");
 

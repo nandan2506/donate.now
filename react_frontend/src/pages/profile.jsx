@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
-  const API_BASE = "http://localhost:8000";
+
+const API_BASE = "https://crowdfundingplatform.onrender.com";
+  
   const [error, setError] = useState("");
   const [user, setUser] = useState({ username: "", email: "", avatar: "" });
   const [userId, setUserId] = useState(null);

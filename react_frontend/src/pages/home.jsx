@@ -19,7 +19,7 @@ function Home() {
       <NavBar />
       <div>
         <section className="w-full">
-          <div className="relative w-full h-[600px]">
+          <div className="relative w-fit mx-auto h-[600px]">
             {/* Background Image */}
             <img
               className="w-full h-full object-cover"
@@ -28,57 +28,58 @@ function Home() {
             />
 
             {/* Right-Side Text Overlay */}
-            <div className="absolute inset-0 flex justify-end items-center px-4 md:px-60">
+            <div className="absolute inset-0 flex md:justify-end items-center px-4 md:px-20">
               <div className="text-white max-w-xl text-right">
-                <h2 className="text-start text-[#444] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-6">
+                <h2 className="text-[#444] text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-6 text-left">
                   Need Funds to Pay For a Medical Emergency or Social Cause?
                 </h2>
 
                 <div className="flex flex-wrap gap-6 justify-start mb-6">
                   <div>
-                    <strong className="text-start text-xl text-[#01BFBD] sm:text-2xl block">
+                    <strong className="text-xl text-[#01BFBD] sm:text-2xl  block text-start">
                       0%
                     </strong>
-                    <p className="text-lg font-bold text-[#999]">
+                    <p className="text-sm md:text-lg font-bold text-[#999]">
                       PLATFORM FEE*
                     </p>
                   </div>
                   <div>
-                    <strong className="text-xl text-[#01BFBD] sm:text-2xl block text-start">
+                    <strong className="text-xl text-[#01BFBD] text-start sm:text-2xl block">
                       72 Lakh+
                     </strong>
-                    <p className="text-lg font-bold text-[#999]">
+                    <p className="text-sm md:text-lg font-bold text-[#999]">
                       CONTRIBUTORS
                     </p>
                   </div>
                   <div>
-                    <strong className="text-xl text-[#01BFBD] sm:text-2xl block text-start">
+                    <strong className="text-xl text-[#01BFBD] text-start sm:text-2xl block">
                       3.2 Lakh+
                     </strong>
-                    <p className="text-lg font-bold  text-[#999]">
-                      FUNDRAISERS
-                    </p>
+                    <p className="text-sm md:text-lg font-bold text-[#999]">FUNDRAISERS</p>
                   </div>
                 </div>
 
-                <p className="text-lg text-start sm:text-xl text-[#01BFBD] mb-6">
-                  Ketto's{" "}
+                <p className="text-lg sm:text-xl text-[#01BFBD] mb-6 text-left">
+                  DonateNow's{" "}
                   <strong className="text-[#01BFBD] text-3xl">
                     0% Platform Fees
                   </strong>{" "}
                   ensures maximum funds for you
                 </p>
 
-                <button
+                <div className="flex justify-center md:justify-start" >
+                  <button
+                  type="button"
                   onClick={() => {
                     isAuthenticated
                       ? navigate("/newCampaign")
                       : navigate("/userSignup");
                   }}
-                  className="text-lg block text-start sm:text-xl bg-[#01BFBD] hover:bg-[#019fa5] text-white px-6 py-3 rounded-xl transition"
+                  className="text-lg sm:text-xl bg-[#01BFBD]   hover:bg-[#019fa5] text-white px-6 py-3 rounded-xl transition"
                 >
                   Start a Fundraiser for Free
                 </button>
+                </div>
               </div>
             </div>
           </div>
@@ -152,7 +153,7 @@ function Home() {
 
         <section>
           <div className="flex items-center justify-center">
-            <div className="flex flex-col md:flex-row items-center justify-evenly shadow-2xl m-10 gap-20 w-fit pt-10 md:p-20 pb-0">
+            <div className="flex flex-col md:flex-row items-center justify-evenly shadow-2xl mt-20 md:m-10 gap-20 w-fit pt-10 md:p-20 pb-0">
               <div>
                 <img
                   className="h-[700px]"
@@ -169,10 +170,10 @@ function Home() {
                     </h1>
                   </div>
 
-                  <div className="md:grid md:grid-cols-2 gap-30 justify-center p-10 md:p-0 items-center">
-                    <div className="flex justify-items-start md:flex-col justify-center items-center w-20">
+                  <div className="md:grid md:grid-cols-2 gap-30 md:justify-center p-10 md:p-0 items-center">
+                    <div className="flex justify-items-start md:flex-col justify-center items-center md:w-20">
                       <img
-                        className="h-20"
+                        className="md:h-20"
                         src="https://ketto.gumlet.io/assets/images/download/phone.png?w=200&dpr=1.3"
                         alt=""
                       />
@@ -181,7 +182,7 @@ function Home() {
                       </span>
                     </div>
 
-                    <div className="flex justify-items-start md:flex-col justify-center items-center w-20">
+                    <div className="flex justify-items-start md:flex-col justify-center items-center md:w-20">
                       <img
                         src="https://ketto.gumlet.io/assets/images/download/withdraw.png?w=200&dpr=1.3"
                         alt=""
@@ -189,7 +190,7 @@ function Home() {
                       <span>Withdraw your funds faster</span>
                     </div>
 
-                    <div className="flex justify-items-start md:flex-col justify-center items-center w-20">
+                    <div className="flex justify-items-start md:flex-col justify-center items-center md:w-20">
                       <img
                         src="https://ketto.gumlet.io/assets/images/download/piggy-bank.png?w=200&dpr=1.3"
                         alt=""
@@ -197,7 +198,7 @@ function Home() {
                       <span>Keep track of all your contributions received</span>
                     </div>
 
-                    <div className="flex justify-items-start md:flex-col justify-center items-center w-20">
+                    <div className="flex justify-items-start md:flex-col justify-center items-center md:w-20">
                       <img
                         src="https://ketto.gumlet.io/assets/images/download/support.png?w=200&dpr=1.3"
                         alt=""
@@ -225,45 +226,45 @@ function Home() {
 
         <section>
           <div className="flex flex-col  items-center my-40 ">
+
             <div className="text-center">
               <h1 className="text-[#444] text-4xl font-bold ">
                 Causes you can raise funds for
               </h1>
-              <p className="text-[#777] m-5 font-sans text-xl">
+              <p className="text-[#777] px-10 m-5 font-sans text-xl">
                 Be it for a personal need, social cause or a creative idea - you
-                can count on us for
-                <br />
-                the project that you want to raise funds for.
+                can count on us for  the project that you want to raise funds for.
               </p>
             </div>
-            <div className="flex flex-wrap gap-2 font-sans font-bold">
+
+            <div className="flex justify-center gap-10 flex-wrap md:gap-6 font-sans font-bold">
               <div className="text-white bg-[url(https://ketto.gumlet.io/assets/images/homepage/causes-bg.png)] rounded-2xl justify-center items-center gap-2 flex flex-col w-35 h-35 p-5">
-                <i class="fa-solid fa-house-medical text-6xl font-bold"></i>
+                <i className="fa-solid fa-house-medical text-6xl font-bold"></i>
                 <span>MEDICAL</span>
               </div>
 
               <div className="text-white bg-[url(https://ketto.gumlet.io/assets/images/homepage/causes-bg.png)] rounded-2xl justify-center items-center gap-2  flex flex-col w-35 h-35 p-5">
-                <i class="fa-solid fa-monument text-6xl font-bold"></i>
+                <i className="fa-solid fa-monument text-6xl font-bold"></i>
                 <span>MEMORIAL</span>
               </div>
 
               <div className="text-white bg-[url(https://ketto.gumlet.io/assets/images/homepage/causes-bg.png)] rounded-2xl justify-center items-center gap-2  flex flex-col w-35 h-35 p-5">
-                <i class="fa-solid fa-baby text-6xl font-bold"></i>
+                <i className="fa-solid fa-baby text-6xl font-bold"></i>
                 <span>CHILDREN</span>
               </div>
 
               <div className="text-white bg-[url(https://ketto.gumlet.io/assets/images/homepage/causes-bg.png)] rounded-2xl justify-center items-center gap-2  flex flex-col w-35 h-35 p-5">
-                <i class="fa-solid fa-graduation-cap text-6xl font-bold"></i>
+                <i className="fa-solid fa-graduation-cap text-6xl font-bold"></i>
                 <span>EDUCATION</span>
               </div>
 
               <div className="text-white bg-[url(https://ketto.gumlet.io/assets/images/homepage/causes-bg.png)] rounded-2xl justify-center items-center gap-2  flex flex-col w-35 h-35 p-5">
-                <i class="fa-solid fa-paw text-6xl font-bold"></i>
+                <i className="fa-solid fa-paw text-6xl font-bold"></i>
                 <span>ANIMAL</span>
               </div>
 
               <div className="text-white bg-[url(https://ketto.gumlet.io/assets/images/homepage/causes-bg.png)] rounded-2xl justify-center items-center gap-2  flex flex-col w-35 h-35 p-5">
-                <i class="fa-solid fa-hand-holding-heart text-6xl font-bold"></i>
+                <i className="fa-solid fa-hand-holding-heart text-6xl font-bold"></i>
                 <span>OTHERS</span>
               </div>
             </div>
@@ -271,57 +272,57 @@ function Home() {
         </section>
 
         <section>
-          <div className="flex flex-col items-center justify-center font-sans gap-4 m-20">
+          <div className="flex flex-col items-center justify-center font-sans gap-4 md:px-10">
             <div>
               <h2 className="text-2xl md:font-bold md:text-4xl font-medium text-gray-700">
                 Why DonateNow?
               </h2>
             </div>
 
-            <div className="flex flex-col md:grid md:grid-cols-4 items-center justify-center m-10 md:p-20 gap-10">
-              <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col md:grid md:grid-cols-4 items-center justify-center m-10 md:p-10 gap-10">
+              <div className="flex flex-col  items-center  md:justify-center">
                 <FaThumbsUp className="text-6xl text-[#01BFBD]" />
-                <p className="text-[#444] font-sans">
+                <p className="text-[#444] text-center font-sans">
                   Induxtry's best fundraising success rate
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center">
                 <FaPeopleGroup className="text-6xl text-[#01BFBD]" />
-                <p className="text-[#444] font-sans">
+                <p className="text-[#444] text-center font-sans">
                   Supported By 10,000,000+ Conributors
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center">
                 <FaTools className="text-6xl text-[#01BFBD]" />
-                <p className="text-[#444] font-sans">
+                <p className="text-[#444] text-center font-sans">
                   Easy-To-Manage Tools To Boost Results
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center">
                 <MdOutlinePayment className="text-6xl text-[#01BFBD]" />
-                <p className="text-[#444] font-sans">
+                <p className="text-[#444] text-center font-sans">
                   Receive contributions via all popular payment modes
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <IoLogoWechat className="text-6xl text-[#01BFBD]" />
+                <IoLogoWechat className="text-6xl text-center text-[#01BFBD]" />
                 <p className="text-[#444] font-sans">Get Expert Support 24/7</p>
               </div>
               <div className="flex flex-col items-center justify-center">
                 <HiComputerDesktop className="text-6xl text-[#01BFBD]" />
-                <p className="text-[#444] font-sans">
+                <p className="text-[#444] text-center font-sans">
                   A Dedicated Smart-Dashboard
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center">
                 <BiMoneyWithdraw className="text-6xl text-[#01BFBD]" />
-                <p className="text-[#444] font-sans">
+                <p className="text-[#444] text-center font-sans">
                   Withdraw Funds Without Hassle
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center">
                 <BsCurrencyExchange className="text-6xl text-[#01BFBD]" />
-                <p className="text-[#444] font-sans">
+                <p className="text-[#444] text-center font-sans">
                   International Payment Support
                 </p>
               </div>

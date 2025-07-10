@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function UserSignup() {
+const API_BASE = "https://crowdfundingplatform.onrender.com";
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -11,6 +13,7 @@ function UserSignup() {
   });
   const [responseMsg, setResponseMsg] = useState("");
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -19,6 +22,7 @@ function UserSignup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const { username, email, password } = formData;
 
     if (!username || !email || !password) {
@@ -28,7 +32,7 @@ function UserSignup() {
     }
 
     try {
-      const res = await fetch("http://localhost:8000/user/signUp", {
+      const res = await fetch(`${API_BASE}/user/signUp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,8 +45,9 @@ function UserSignup() {
       setError(!res.ok);
 
       if (res.ok) {
+        toast.success(data.msg);
         setTimeout(() => {
-          navigate("/userLogin");
+          navigate("/verify-otp");
         }, 1500);
       }
     } catch (err) {
@@ -50,6 +55,7 @@ function UserSignup() {
       setError(true);
       setResponseMsg("Something went wrong");
     }
+    setLoading(false);
   };
 
   return (
@@ -120,9 +126,40 @@ function UserSignup() {
             </button>
             <button
               type="submit"
-              className="px-6 py-2 bg-[#01BFBD] text-white rounded-lg hover:bg-[#019fa5] transition w-full"
+              disabled={loading}
+              className={`px-6 py-2 rounded-lg text-white w-full flex justify-center items-center transition ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-[#01BFBD] hover:bg-[#019fa5]"
+              }`}
             >
-              Signup
+              {loading ? (
+                <>
+                  <svg
+                    className="animate-spin h-5 w-5 mr-2 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 11-8 8z"
+                    ></path>
+                  </svg>
+                  Signing up...
+                </>
+              ) : (
+                "Signup"
+              )}
             </button>
           </div>
         </form>

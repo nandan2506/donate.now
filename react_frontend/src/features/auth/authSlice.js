@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem("add-new-campaign-token"),
@@ -19,6 +20,7 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
       localStorage.removeItem("add-new-campaign-token");
+      toast.success('loged out succesfully')
     },
   }
 });

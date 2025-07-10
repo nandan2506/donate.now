@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = "https://crowdfundingplatform.onrender.com";
 
 function UpdateCampaign() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function UpdateCampaign() {
   });
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(true);
+  const [submmiting, setSubmmiting] = useState(false);
 
   const token = localStorage.getItem("add-new-campaign-token");
 
@@ -65,6 +67,8 @@ function UpdateCampaign() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmmiting(true);
+
     const { title, description, goalAmount, milestones, media } = form;
 
     try {
@@ -89,13 +93,16 @@ function UpdateCampaign() {
       const data = await response.json();
 
       if (response.ok) {
-        alert("✅ Campaign updated successfully!");
-        navigate("/allCampaigns");
+        toast.success("Campaign updated successfully!");
+        setSubmmiting(false);
+        navigate("/myCampaigns");
       } else {
+        toast.error(response.msg);
         setMessage(data.msg || "❌ Failed to update campaign.");
       }
     } catch (err) {
       console.error("Error updating campaign:", err);
+      toast.error(err.message);
       setMessage("❌ Error updating campaign.");
     }
   };
@@ -197,9 +204,38 @@ function UpdateCampaign() {
 
           <button
             type="submit"
-            className="w-full bg-[#01BFBD] text-white font-semibold py-3 rounded-md hover:bg-[#019fa5] transition"
+            disabled={submmiting}
+            className={`w-full flex items-center justify-center gap-2 bg-[#01BFBD] text-white font-semibold py-3 rounded-md transition ${
+              loading ? "opacity-50 cursor-not-allowed" : "hover:bg-[#019fa5]"
+            }`}
           >
-            Update Campaign
+            {submmiting ? (
+              <>
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 11-8 8z"
+                  ></path>
+                </svg>
+                Updating...
+              </>
+            ) : (
+              "Update Campaign"
+            )}
           </button>
         </form>
 

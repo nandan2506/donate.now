@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = "https://crowdfundingplatform.onrender.com";
 
 function DonatePage() {
   const [searchParams] = useSearchParams();
@@ -11,6 +12,7 @@ function DonatePage() {
   const [campaignTitle, setCampaignTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchCampaign = async () => {
@@ -55,10 +57,12 @@ function DonatePage() {
     const token = localStorage.getItem("add-new-campaign-token");
 
     if (!token) {
-      alert("Please login first!");
+      toast("Please login first!");
       navigate("/userLogin");
       return;
     }
+
+    setLoading(true);
 
     try {
       const response = await fetch(
@@ -76,51 +80,80 @@ function DonatePage() {
       const data = await response.json();
 
       if (response.ok) {
-        alert("Thank you for your donation!");
-        navigate(`/home`);
+        toast("Thank you for your donation!");
+        navigate(`/`);
       } else {
         alert(data.msg || "Failed to donate.");
       }
     } catch (error) {
       console.error("Error while donating:", error);
-      alert("Something went wrong.");
+      toast("Something went wrong.");
     }
+
+    setLoading(false);
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#01BFBD] to-[#e8f9f7] px-4">
-        <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg space-y-6">
-          <h2 className="text-2xl font-bold text-[#01BFBD] text-center">
-            Donate to Campaign
-          </h2>
+      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg space-y-6">
+        <h2 className="text-2xl font-bold text-[#01BFBD] text-center">
+          Donate to Campaign
+        </h2>
 
-          <h3 className="text-lg font-semibold text-gray-700 text-center">
-            {campaignTitle ? `Campaign: ${campaignTitle}` : "Loading..."}
-          </h3>
+        <h3 className="text-lg font-semibold text-gray-700 text-center">
+          {campaignTitle ? `Campaign: ${campaignTitle}` : "Loading..."}
+        </h3>
 
-          <input
-            type="number"
-            value={amount}
-            min="1"
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="Enter donation amount"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#01BFBD] text-gray-800"
-          />
+        <input
+          type="number"
+          value={amount}
+          min="1"
+          onChange={(e) => setAmount(e.target.value)}
+          placeholder="Enter donation amount"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#01BFBD] text-gray-800"
+        />
 
-          <button
-            onClick={handleDonate}
-            className="w-full bg-[#01BFBD] text-white font-semibold py-3 rounded-lg hover:bg-[#019fa5] transition"
-          >
-            Donate
-          </button>
-
-          {message && (
-            <div className="text-center text-red-600 font-medium">
-              {message}
-            </div>
+        <button
+          onClick={handleDonate}
+          disabled={loading}
+          className={`w-full font-semibold py-3 rounded-lg transition flex items-center justify-center ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-[#01BFBD] text-white hover:bg-[#019fa5]"
+          }`}
+        >
+          {loading ? (
+            <>
+              <svg
+                className="animate-spin h-5 w-5 mr-2 text-white"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 11-8 8z"
+                ></path>
+              </svg>
+              Processing...
+            </>
+          ) : (
+            "Contribute Now"
           )}
-        </div>
+        </button>
+
+        {message && (
+          <div className="text-center text-red-600 font-medium">{message}</div>
+        )}
       </div>
+    </div>
   );
 }
 
