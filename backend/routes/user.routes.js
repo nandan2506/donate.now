@@ -5,10 +5,10 @@ const {
   allUsers,
   userProfile,
   updateProfile,
-  // verifyEmail,
   checkPassword,
   forgetPassword,
   setNewPassword,
+  verifyOtp,
 } = require("../controllers/user.controller");
 
 
@@ -21,10 +21,10 @@ userRoutes.post("/login", userLogin)
 userRoutes.get("/allUsers",auth, isAdmin, allUsers)
 userRoutes.get("/userProfile/:userId", auth, userProfile)
 userRoutes.put("/updateProfile/:userId", auth, updateProfile)
-// userRoutes.get("/verify-email",auth, verifyEmail)
-userRoutes.post("/forgetPassword",auth, forgetPassword)
+userRoutes.put("/verify-otp", verifyOtp)
+userRoutes.post("/forgetPassword", forgetPassword)
 userRoutes.post("/checkPassword",auth, checkPassword)
-userRoutes.post("/resetPassword",auth, setNewPassword)
+userRoutes.post("/setNewPassword", setNewPassword)
 
 
 module.exports = userRoutes;

@@ -26,22 +26,4 @@ const auth = async (req, res, next) => {
 }
 
 
-const verifyEmail = async (req, res) => {
-  try {
-    const { token } = req.query;
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await userModel.findById(decoded.userId);
-    if (!user) {
-      return res.status(400).send("Invalid link");
-    }
-    user.isVerified = true;
-    await user.save();
-
-    res.send("Email verified successfully!");
-  } catch (error) {
-    console.log(error);
-    res.status(400).send("Invalid or expired link");
-  }
-}
-
-module.exports = { auth, verifyEmail }
+module.exports = { auth,}
